@@ -30,10 +30,15 @@ app.get('/', function(req, res) {
     res.redirect('/games');
 });
 
+app.get('/available', function(req, res) {
+    output = fs.readdirSync(__dirname + '/../zcode/');
+    res.send(output);
+})
+
 app.post('/games', function(req, res) {
     var label = req.body.label;
-    var game = req.body.game.replace(/[^a-z0-9]/, '');
-    var zFile = __dirname + '/../zcode/' + game + '.z5';
+    var game = req.body.game;
+    var zFile = __dirname + '/../zcode/' + game;
     var child = spawn(__dirname + "/../frotz/dfrotz", ["-S 0", zFile]);
     console.log("Game %s spawned for %s: %s", child.pid, label, zFile)
     games[child.pid] = {
