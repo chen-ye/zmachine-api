@@ -3,6 +3,7 @@ var bodyParser = require('body-parser');
 var AWS = require('aws-sdk');
 var env = require('node-env-file');
 var spawn = require('child_process').spawn;
+var fs = require('fs');
 
 var app = express();
 
